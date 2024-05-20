@@ -1,0 +1,12 @@
+.product-cart {
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: space-between; 
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    gap: 20px;
+  }
+  .product-cart a{
+    text-decoration: none;
+    color:black
+  }

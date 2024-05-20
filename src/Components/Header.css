@@ -1,0 +1,93 @@
+.nav-container {
+  display: flex;
+  align-items: center;
+  background-color: #f8f9ffd6;
+  box-shadow: 0 2px 4px rgba(233, 229, 229, 0.1);
+  justify-content: space-between;
+  border-radius: 1px;
+
+}
+.logo-img{
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    border-radius: 10px;
+    
+}
+.logo-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+   
+}
+.logo-container >p{
+    font-size: 30px;
+    font-weight: bold;
+    color: black;
+    font-family: poppins;
+}
+.logo-container  >span{
+    font-size: 30px;
+    font-weight: bold;
+    color: #097583;
+    font-family: poppins;
+}
+.search-container{
+    width: 120px;
+    height: 40px;
+    padding: 20px;
+    
+}
+.search-bar{
+    width: 80%px;
+    height: 20px;
+    border-radius: 20px;
+    border-color: rgb(255, 255, 255);
+    border: 0;
+    outline: none;
+    font-size: 17px;
+    background-color: transparent;
+}
+
+nav ul{
+    display: flex;
+    justify-content: space-around;
+     padding-left: 60px;
+
+}
+nav ul li {
+    list-style-type: none;
+    padding-right: 30px;
+}
+nav ul li a{
+    list-style-type: none;
+    text-decoration: none;
+    color:black
+}
+nav ul li a:hover{
+    color: orange;
+    cursor: pointer;
+}
+
+.cart-logo{
+    width: 30px;
+    height: 30px;
+}
+.login{
+    margin-left: 80px;
+    width: 100px;
+    height: 50px;
+    border-radius: 20px;
+    background-color: rgb(224, 211, 231);
+}
+.login:hover{
+    background-color: rgb(179, 111, 51);
+    cursor: pointer;
+}
+.login >a{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-family: poppins;
+    font-weight: bold;
+}
