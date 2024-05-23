@@ -1,6 +1,8 @@
-// SignUp.js
+// src/SignUp.js
 import React, { useState } from 'react';
 import './SignUp.css';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -8,6 +10,7 @@ const SignUp = () => {
     email: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,10 +20,15 @@ const SignUp = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
-   
+    try {
+      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      localStorage.setItem('token', response.data.token);
+      navigate('/user/dashboard'); // Redirect to user dashboard
+    } catch (error) {
+      console.error('Registration failed:', error.response.data.error);
+    }
   };
 
   return (

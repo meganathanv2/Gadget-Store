@@ -1,23 +1,49 @@
 import React, { useState } from 'react';
-import './Uploating.css';
+import './Uploading.css';
+import axios from 'axios';
 
 const Uploading = () => {
-      const [imageUrl, setImageUrl] = useState('');
+  const [name, setName] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
   const [price, setPrice] = useState('');
   const [rating, setRating] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Image URL:', imageUrl);
-    console.log('Price:', price);
-    console.log('Rating:', rating);
-    // Here you can add the logic to handle the form submission, e.g., sending data to an API
+    try {
+      const token = localStorage.getItem('token');
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      };
+      const response = await axios.post('http://localhost:5000/api/products/add', {
+        name,  // Include name in the request payload
+        imageUrl,
+        price,
+        rating
+      }, config);
+      console.log('Product added:', response.data);
+      // Clear form or show success message
+    } catch (error) {
+      console.error('Error adding product:', error.response.data.error);
+    }
   };
+
   return (
-  
     <div className="upload-container">
       <h2>Upload Cart Details</h2>
       <form onSubmit={handleSubmit} className="upload-form">
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="imageUrl">Image URL:</label>
           <input
@@ -50,7 +76,7 @@ const Uploading = () => {
         <button type="submit">Submit</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
-export default Uploading
+export default Uploading;

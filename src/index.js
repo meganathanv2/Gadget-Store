@@ -2,51 +2,51 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
-import { createBrowserRouter,RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Login from './Components/Login';
 import Error from './Components/Error';
 import Body from './Components/Body';
-import GadgetDetails from './Components/GadgetDetails';
 import SignUp from './Components/SignUp';
 import Uploading from './Components/Uploading';
+import Cart from './Components/Cart';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-const approuter =createBrowserRouter([
+
+
+const router = createBrowserRouter([
   {
-    path:'/',
-    element:<App/>,
-    errorElement:<Error/>,
-    children:[
+    path: '/',
+    element: <App />,
+    errorElement: <Error />,
+  },
       {
-        path:'/',
-        element:<Body/>
-      }
-    ]
-   
-  },
- {
-  path:'/AllProducts',
-  element:<Body/>
- },
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'signup',
+        element: <SignUp />,
+      },
+      {
+        path: 'uploading',
+        element: <Uploading />,
+      },
+      {
+        path: 'cart',
+        element: <Cart />,
+      },
+      // {
+      //   path: 'product-detail',
+      //   element: <ProductDetail product={sampleProduct} addToCart={(item) => console.log(item)} />,
+      // },
   {
-    path:'/login',
-    element:<Login/>
-  },
-  {
-    path:'/gadgets/:id',
-    element:<GadgetDetails/>
-  },
-  {
-    path:'/SignUp',
-    element:<SignUp/>
-  }
-  ,{
-    path:'/upload',
+    path:'/body',
+    element:<Body/>
+  },{
+    path:"/upload",
     element:<Uploading/>
   }
-])
-root.render(
- <RouterProvider router={approuter}></RouterProvider>
+]);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <RouterProvider router={router} />
 );
-
-
