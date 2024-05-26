@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ProductDetail.css';
 
-const ProductDetail = ({ product, addToCart }) => {
+const GatgetDetails = ({ product, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
 
@@ -63,4 +63,4 @@ const ProductDetail = ({ product, addToCart }) => {
   );
 };
 
-export default ProductDetail;
+export default GatgetDetails;

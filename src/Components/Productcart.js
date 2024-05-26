@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
-import './ProductDetail.css';
+import React, { useState, useContext } from 'react';
+import './Productcart.css';
+import { CartContext } from '../contexts/CartContext';
 
 const sampleProduct = {
   id: 1,
   name: 'Airpods Pro 2nd Gen Mastercopy',
   priceRange: { min: 1500, max: 1700 },
-  imageUrl: 'https://example.com/image.jpg', // Replace with the actual image URL
+  imageUrl: 'https://example.com/image.jpg',
   reviews: 179,
   options: ['With ANC', 'Without ANC'],
 };
 
-const ProductDetail = ({ product, addToCart }) => {
+const Productcart = () => {
   const [quantity, setQuantity] = useState(1);
   const [selectedOption, setSelectedOption] = useState('');
+  const { addToCart } = useContext(CartContext);
+  const product = sampleProduct;
 
   const handleQuantityChange = (delta) => {
     setQuantity((prevQuantity) => Math.max(1, prevQuantity + delta));
@@ -29,10 +32,12 @@ const ProductDetail = ({ product, addToCart }) => {
   return (
     <div className="product-detail-container">
       <div className="product-image">
+        <img src={product.imageUrl} alt={product.name} />
       </div>
       <div className="product-info">
         <h2>{product.name}</h2>
         <p className="product-price">
+          ₹{product.priceRange.min} - ₹{product.priceRange.max}
         </p>
         <div className="product-rating">
           <span className="stars">⭐⭐⭐⭐</span>
@@ -70,4 +75,4 @@ const ProductDetail = ({ product, addToCart }) => {
   );
 };
 
-export default ProductDetail;
+export default Productcart;
