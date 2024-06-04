@@ -9,7 +9,7 @@ const Error = () => {
   <>
   {/* <h2>Opps!!</h2>
   <h3>Some thing went wrong</h3> */}
-  <img className='error-container' src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS9Nz7OhucycbtPl95tLeaYDWA9a7IkNc7aHLT4klfOi7B447M7q7nwLMZKeQ&s' alt='Error'/>
+  <img className='error-container' src='https://colibriwp.com/blog/wp-content/uploads/2019/07/2488756.jpg' alt='Error'/>
   </>
   )
 }

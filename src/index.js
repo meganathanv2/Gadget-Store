@@ -5,13 +5,12 @@ import './index.css';
 import App from './App';
 import Login from './Components/Login';
 import Error from './Components/Error';
-import Body from './Components/Body';
 import SignUp from './Components/SignUp';
 import Uploading from './Components/Uploading';
 import Cart from './Components/Cart';
 import CartProvider from './CartContext';
 import Checkout from './Components/Checkout';
-
+import Body from './Components/Body';
 const router = createBrowserRouter([
   {
     path: '/',
