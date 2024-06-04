@@ -1,4 +1,3 @@
-// src/SignUp.js
 import React, { useState } from 'react';
 import './SignUp.css';
 import axios from 'axios';
@@ -23,11 +22,15 @@ const SignUp = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/register', formData);
+      const response = await axios.post('http://localhost:5000/api/users/register', formData);
       localStorage.setItem('token', response.data.token);
-      navigate('/user/dashboard'); // Redirect to user dashboard
+      navigate('/user/dashboard');
     } catch (error) {
-      console.error('Registration failed:', error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+        console.error('Registration failed:', error.response.data.error);
+      } else {
+        console.error('Registration failed:', error.message);
+      }
     }
   };
 

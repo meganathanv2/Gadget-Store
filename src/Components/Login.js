@@ -29,22 +29,30 @@ const Login = () => {
   const handleAdminSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', adminCredentials);
+      const response = await axios.post('http://localhost:5000/api/users/login', adminCredentials);
       localStorage.setItem('token', response.data.token);
-      navigate('/upload'); 
+      navigate('/upload');
     } catch (error) {
-      setAdminError('Admin login failed: ' + error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setAdminError('Admin login failed: ' + error.response.data.error);
+      } else {
+        setAdminError('Admin login failed: ' + error.message);
+      }
     }
   };
 
   const handleUserSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:5000/api/auth/login', userCredentials);
+      const response = await axios.post('http://localhost:5000/api/users/login', userCredentials);
       localStorage.setItem('token', response.data.token);
-      navigate('/user/dashboard'); 
+      navigate('/user/dashboard');
     } catch (error) {
-      setUserError('User login failed: ' + error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+        setUserError('User login failed: ' + error.response.data.error);
+      } else {
+        setUserError('User login failed: ' + error.message);
+      }
     }
   };
 

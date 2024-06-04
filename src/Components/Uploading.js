@@ -7,32 +7,59 @@ const Uploading = () => {
   const [imageUrl, setImageUrl] = useState('');
   const [price, setPrice] = useState('');
   const [rating, setRating] = useState('');
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError(null);
+    setSuccess(null);
+
     try {
       const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token not found');
+      }
+
       const config = {
         headers: {
-          Authorization: `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       };
-      const response = await axios.post('http://localhost:5000/api/products/add', {
-        name,  // Include name in the request payload
+
+      const payload = {
+        name,
         imageUrl,
         price,
-        rating
-      }, config);
-      console.log('Product added:', response.data);
-      // Clear form or show success message
+        rating,
+      };
+
+      console.log('Submitting payload:', payload);
+
+      const response = await axios.post('http://localhost:5000/api/products/add', payload, config);
+
+      if (response && response.data) {
+        console.log('Product added:', response.data);
+        setName('');
+        setImageUrl('');
+        setPrice('');
+        setRating('');
+        setSuccess('Product added successfully!');
+      } else {
+        throw new Error('Failed to add product');
+      }
     } catch (error) {
-      console.error('Error adding product:', error.response.data.error);
+      console.error('Error adding product:', error);
+      setError(error.response?.data?.error || 'An error occurred. Please try again.');
     }
   };
 
   return (
     <div className="upload-container">
       <h2>Upload Cart Details</h2>
+      {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
       <form onSubmit={handleSubmit} className="upload-form">
         <div className="form-group">
           <label htmlFor="name">Name:</label>

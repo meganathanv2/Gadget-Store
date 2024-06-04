@@ -1,42 +1,51 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Data } from '../Comman/Data';
-import { useState } from 'react';
 import './Header.css';
 
-const Header = () => {
+const Header = ({ filter, products }) => {
   const [search, setSearch] = useState('');
-  const [filteredProducts, setFilteredProducts] = useState(Data);
 
-  const handlesearch = (e) => {
+  const handleSearch = (e) => {
     const query = e.target.value;
     setSearch(query);
-    setFilteredProducts(Data.filter((product) => {
-      return product.name.toLowerCase().includes(query.toLowerCase());
-    }));
+    filter(
+      products.filter((product) => 
+        product.name.toLowerCase().includes(query.toLowerCase())
+      )
+    );
   };
 
   return (
     <nav className='nav-container'>
       <div className='logo-container'>
-        <img className='logo-img' src='data:image/jpeg;base64,...' alt='Logo'/>
-        <p>GADGET</p><span>STORE</span>
+        <img className='logoic' src='https://i.pinimg.com/originals/e7/6a/76/e76a76c2b4b7de936c613010420b4112.png' alt='Logo' />
+        <p className='logo-text'>GADGET<span>STORE</span></p>
       </div>
       <div className='search-container'>
-        <input type='text' placeholder='Search...' className='search-bar' onChange={handlesearch} value={search}/>
+        <input
+          type='text'
+          placeholder='Search...'
+          className='search-bar'
+          onChange={handleSearch}
+          value={search}
+        />
       </div>
       <div className='productnames'>
         <ul>
           <li><Link to='/Airpods'>Airpods</Link></li>
           <li><Link to='/Speakers'>Speakers</Link></li>
-          <li><Link to='/SmartWatchs'>Smart Watchs</Link></li>
+          <li><Link to='/SmartWatchs'>Smart Watches</Link></li>
           <li><Link to='/Chargers'>Chargers</Link></li>
           <li><Link to='/AllProducts'>All Products</Link></li>
         </ul>
       </div>
       <div className='cart-container'>
         <Link to='/cart'>
-          <img className='cart-logo' src='https://cdn-icons-png.flaticon.com/128/833/833314.png' alt='Cart'/>
+          <img
+            className='cart-logo'
+            src='https://cdn-icons-png.flaticon.com/128/833/833314.png'
+            alt='Cart'
+          />
         </Link>
       </div>
       <div className='login-container'>
@@ -44,6 +53,6 @@ const Header = () => {
       </div>
     </nav>
   );
-}
+};
 
 export default Header;
